@@ -10,16 +10,19 @@ public class Board {
         this.boardListener = listener;
     }
     public void move(byte row, byte col) {
+        if (board[row][col] != 0) {
+            boardListener.invalidPlay(row, col);
+            return;
+        }
         if (player1Turn) {
             board[row][col] = PLAYER_1_SYMBOL;
             boardListener.playedAt(PLAYER_1_SYMBOL, row, col);
-        }else {
+        } else {
             board[row][col] = PLAYER_2_SYMBOL;
             boardListener.playedAt(PLAYER_2_SYMBOL, row, col);
         }
         player1Turn = !player1Turn;
     }
-
 
 
 }
